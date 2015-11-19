@@ -43,19 +43,29 @@
         <translation>退出 (&amp;Q)</translation>
     </message>
     <message>
-        <location filename="../../widget.cpp" line="63"/>
+        <location filename="../../widget.cpp" line="64"/>
         <source>%0+2Days Before Summer Holiday</source>
         <translation>离暑假还有%0+2天</translation>
     </message>
     <message>
-        <location filename="../../widget.cpp" line="74"/>
+        <location filename="../../widget.cpp" line="75"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../../widget.cpp" line="75"/>
+        <location filename="../../widget.cpp" line="76"/>
         <source>&lt;h2&gt;Count Down&lt;/h2&gt;&lt;p&gt;&lt;a href=&apos;http://ld.mmyz.net/&apos;&gt;LingDong Computer Society&lt;/a&gt; 2015&lt;/p&gt;</source>
         <translation>&lt;h2&gt;高考倒计时&lt;/h2&gt;&lt;p&gt;&lt;a href=&apos;http://ld.mmyz.net/&apos;&gt;灵动计算机社&lt;/a&gt; 2015&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../widget.cpp" line="91"/>
+        <source>Tip</source>
+        <translation>提醒</translation>
+    </message>
+    <message>
+        <location filename="../../widget.cpp" line="91"/>
+        <source>Find me here next time</source>
+        <translation>下次可以在这里找到我</translation>
     </message>
 </context>
 </TS>

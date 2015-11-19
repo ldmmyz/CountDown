@@ -37,6 +37,7 @@ Widget::Widget(QWidget *parent) :
 
     setting = new QSettings("LingDong", "CountDown", this);
     readSetting();
+    firstRun();
 
     setWindowFlags(Qt::FramelessWindowHint | Qt::Tool); // no window border, no taskbar icon
     setWindowOpacity(0.75); // Set transparency
@@ -81,4 +82,13 @@ void Widget::showSetting()
     if (settingDialog->exec() == QDialog::Accepted)
         readSetting();
     delete settingDialog;
+}
+
+void Widget::firstRun()
+{
+    if (setting->value("action/firstRun", true).toBool()) {
+        showSetting();
+        trayIcon->showMessage(tr("Tip"), tr("Find me here next time"));
+        setting->setValue("action/firstRun", false);
+    }
 }

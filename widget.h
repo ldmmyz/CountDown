@@ -29,6 +29,7 @@ private:
     void readSetting();
     void showAbout();
     void showSetting();
+    void firstRun();
 
 public:
     explicit Widget(QWidget *parent = 0);
