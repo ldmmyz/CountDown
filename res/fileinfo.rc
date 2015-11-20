@@ -7,8 +7,8 @@ IDI_ICON1 ICON "Icon/canlendar.ico"
 #endif
 
 VS_VERSION_INFO VERSIONINFO
-    FILEVERSION 0,0,0,2
-    PRODUCTVERSION 1,0,0,2
+    FILEVERSION 0,0,2,0
+    PRODUCTVERSION 0,0,2,0
     FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
     FILEFLAGS VS_FF_DEBUG
@@ -23,12 +23,12 @@ VS_VERSION_INFO VERSIONINFO
         BEGIN
             BLOCK "040904B0"
             BEGIN
-                VALUE "CompanyName", "Áé¶¯¼ÆËã»úÉç\0"
-                VALUE "FileDescription", "¸ß¿¼µ¹¼ÆÊ±\0"
+                VALUE "CompanyName", "çµåŠ¨è®¡ç®—æœºç¤¾\0"
+                VALUE "FileDescription", "é«˜è€ƒå€’è®¡æ—¶\0"
                 VALUE "FileVersion", "0.0.2.0\0"
-                VALUE "LegalCopyright", "Copyright (C) 2015 Áé¶¯¼ÆËã»úÉç\0"
+                VALUE "LegalCopyright", "Copyright (C) 2015 çµåŠ¨è®¡ç®—æœºç¤¾\0"
                 VALUE "OriginalFilename", "CountDown.exe\0"
-                VALUE "ProductName", "¸ß¿¼µ¹¼ÆÊ±\0"
+                VALUE "ProductName", "é«˜è€ƒå€’è®¡æ—¶\0"
                 VALUE "ProductVersion", "0.0.2.0\0"
 				VALUE "InternalName", "CountDown.exe\0"
             END
