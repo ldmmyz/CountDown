@@ -33,6 +33,7 @@ private:
 
 public:
     explicit Widget(QWidget *parent = 0);
+    ~Widget();
 };
 
 #endif // WIDGET_H
