@@ -20,6 +20,7 @@ private:
     QAction *settingAction;
     QAction *aboutAction;
     QDate examDate;
+    QString text;
     QTimer *timer;
 
     void mousePressEvent(QMouseEvent *event);

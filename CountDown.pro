@@ -25,7 +25,7 @@ FORMS   += widget.ui \
 RESOURCES += \
     res/res.qrc
 
-TRANSLATIONS += res/Translation/lan.zh_CN.ts
+TRANSLATIONS += res/Translation/CountDown_zh_CN.ts
 
 RC_FILE += \
     res/fileinfo.rc

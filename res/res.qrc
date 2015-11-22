@@ -3,6 +3,6 @@
         <file alias="icon">Icon/canlendar.png</file>
     </qresource>
     <qresource prefix="/translation">
-        <file alias="lan.zh_CN">Translation/lan.zh_CN.qm</file>
+        <file alias="CountDown_zh_CN">Translation/CountDown_zh_CN.qm</file>
     </qresource>
 </RCC>

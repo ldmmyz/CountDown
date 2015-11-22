@@ -40,7 +40,6 @@ Widget::Widget(QWidget *parent) :
     firstRun();
 
     setWindowFlags(Qt::FramelessWindowHint | Qt::Tool); // no window border, no taskbar icon
-    setWindowOpacity(0.75); // Set transparency
 
     // Update every minute
     timer = new QTimer(this);
@@ -65,23 +64,26 @@ void Widget::mouseMoveEvent(QMouseEvent *event)
 
 void Widget::setText()
 {
-    label->setText(QString(tr("%0+2Days Before Summer Holiday")).arg(QDate::currentDate().daysTo(examDate)));
+    label->setText(text.replace("%", QString::number(QDate::currentDate().daysTo(examDate))));
 }
 
 void Widget::readSetting()
 {
     examDate = setting->value("data/examDate", QDate(QDate::currentDate().year(), 6, 7)).toDate();
+    text = setting->value("data/text", tr("% Days Before Entrance Exam")).toString();
+    setWindowOpacity(setting->value("action/opacity", 0.75).toDouble());
+    setText();
+    adjustSize();
     // Move to the position last time
     // If it's the first execution, move to the rightside
     move(setting->value("action/pos",
-                        QPoint(QApplication::desktop()->width() - this->width() - 35, 35)).toPoint());
-    setText();
+                        QPoint(QApplication::desktop()->width() - width() - 35, 35)).toPoint());
 }
 
 void Widget::showAbout()
 {
     QMessageBox::about(this, tr("About"),
-                       tr("<h2>Count Down</h2><p><a href='http://ld.mmyz.net/'>LingDong Computer Society</a> 2015</p>"));
+                       tr("<h1>Count Down</h1><p><strong>Copyright 2015 <a href='http://ld.mmyz.net/'>LingDong Computer Society</a></strong><br/>This is an opensource software under The MIT License.</p><p>Home Page: <a href='http://github.com/ziqin/CountDown'>http://github.com/ziqin/CountDown</a></p>"));
 }
 
 void Widget::showSetting()
@@ -97,7 +99,7 @@ void Widget::firstRun()
 {
     if (setting->value("action/firstRun", true).toBool()) {
         showSetting();
-        trayIcon->showMessage(tr("Tip"), tr("Find me here next time"));
+        trayIcon->showMessage(tr("Tip"), tr("Find me here next time!"));
         setting->setValue("action/firstRun", false);
     }
 }

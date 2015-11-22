@@ -14,9 +14,13 @@ public:
 
 private slots:
     void on_buttonBox_accepted();
+    void on_buttonBox_clicked(QAbstractButton *button);
+    void on_opacitySlider_valueChanged(int value);
+    void on_opacityDoubleSpinBox_valueChanged(double value);
 
 private:
     QSettings *setting, *reg;
+    void readSetting();
 };
 
 #endif // SETTINGDIALOG_H

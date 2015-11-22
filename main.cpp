@@ -5,9 +5,9 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QTranslator translator;
-    translator.load(QLocale::system(), "lan", ".", ":/translation");
-    a.installTranslator(&translator);
+    QTranslator appTr;
+    appTr.load(QLocale::system(), "CountDown", "_", ":/translation");
+    a.installTranslator(&appTr);
     Widget w;
     w.show();
 
