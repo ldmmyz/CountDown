@@ -17,7 +17,8 @@ SOURCES += main.cpp \
     settingdialog.cpp
 
 HEADERS += widget.h \
-    settingdialog.h
+    settingdialog.h \
+    settings.h
 
 FORMS   += widget.ui \
     settingdialog.ui
