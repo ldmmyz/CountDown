@@ -9,7 +9,6 @@
 #include <QSettings>
 #include <QTimer>
 #include <QDesktopWidget>
-#include <QDebug>
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent)
@@ -37,7 +36,7 @@ Widget::Widget(QWidget *parent) :
     trayIconMenu->addAction(quitAction);
     trayIcon->setContextMenu(trayIconMenu);
 
-    setting = new QSettings(ST::ORG_NAME, ST::APP_NAME, this);
+    setting = new QSettings(St::OrgName, St::AppName, this);
     readSetting();
     firstRun();
 
@@ -51,7 +50,7 @@ Widget::Widget(QWidget *parent) :
 
 Widget::~Widget()
 {
-    setting->setValue(ST::ACTION_POS, pos());
+    setting->setValue(St::Action_Pos, pos());
 }
 
 /// Make it possible to drag the window without titlebar
@@ -66,19 +65,19 @@ void Widget::mouseMoveEvent(QMouseEvent *event)
 
 void Widget::setText()
 {
-    label->setText(text.replace(ST::DEFAULT_SYMBOL, QString::number(QDate::currentDate().daysTo(examDate))));
+    label->setText(text.replace(St::Default_Symbol, QString::number(QDate::currentDate().daysTo(examDate))));
 }
 
 void Widget::readSetting()
 {
-    examDate = setting->value(ST::DATA_EXAMDATE, ST::DEFAULT_DATE).toDate();
-    text = setting->value(ST::DATA_TEXT, ST::DEFAULT_TEXT).toString();
-    setWindowOpacity(setting->value(ST::ACTION_OPACITY, ST::DEFAULT_OPACITY).toDouble());
+    examDate = setting->value(St::Date_ExamDate, St::Default_Date).toDate();
+    text = setting->value(St::Date_Text, St::Default_Text).toString();
+    setWindowOpacity(setting->value(St::Action_Opacity, St::Default_Opacity).toDouble());
     setText();
     adjustSize();
     // Move to the position last time
     // If it's the first execution, move to the rightside
-    move(setting->value(ST::ACTION_POS,
+    move(setting->value(St::Action_Pos,
                         QPoint(QApplication::desktop()->width() - width() - 35, 35)).toPoint());
 }
 
@@ -98,9 +97,9 @@ void Widget::showSetting()
 /// Show Setting Dialog & Tip Message if it's the first execution
 void Widget::firstRun()
 {
-    if (setting->value(ST::ACTION_FIRSTRUN, true).toBool()) {
+    if (setting->value(St::Action_FirstRun, true).toBool()) {
         showSetting();
         trayIcon->showMessage(tr("Tip"), tr("Find me here next time!"));
-        setting->setValue(ST::ACTION_FIRSTRUN, false);
+        setting->setValue(St::Action_FirstRun, false);
     }
 }

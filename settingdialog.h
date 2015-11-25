@@ -10,7 +10,7 @@ class SettingDialog : public QDialog, private Ui::SettingDialog
     Q_OBJECT
 
 public:
-    explicit SettingDialog(QWidget *parent = 0);
+    explicit SettingDialog(QWidget *parent = nullptr);
 
 private slots:
     void on_buttonBox_accepted();
@@ -20,6 +20,7 @@ private slots:
 
 private:
     QSettings *setting, *reg;
+    const QString filePath;
     void readSetting();
 };
 

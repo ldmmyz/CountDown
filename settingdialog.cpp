@@ -4,16 +4,17 @@
 #include <QPushButton>
 
 SettingDialog::SettingDialog(QWidget *parent) :
-    QDialog(parent)
+    QDialog(parent),
+    filePath(QApplication::applicationFilePath().replace('/', '\\'))
 {
     setupUi(this);
 
-    setting = new QSettings(ST::ORG_NAME, ST::APP_NAME, this);
+    setting = new QSettings(St::OrgName, St::AppName, this);
     reg = new QSettings("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
-                    QSettings::NativeFormat, this);
+                        QSettings::NativeFormat, this);
     readSetting();
 
-    textLineEdit->setToolTip(tr("Use %0 to represent the number generated automatically").arg(ST::DEFAULT_SYMBOL));
+    textLineEdit->setToolTip(tr("Use %0 to represent the number generated automatically").arg(St::Default_Symbol));
 
     buttonBox->button(QDialogButtonBox::Save)->setText(tr("Save"));
     buttonBox->button(QDialogButtonBox::Cancel)->setText(tr("Cancel"));
@@ -22,14 +23,13 @@ SettingDialog::SettingDialog(QWidget *parent) :
 
 void SettingDialog::readSetting()
 {
-    calendar->setSelectedDate(setting->value(ST::DATA_EXAMDATE, ST::DEFAULT_DATE).toDate());
-    textLineEdit->setText(setting->value(ST::DATA_TEXT, ST::DEFAULT_TEXT).toString());
+    calendar->setSelectedDate(setting->value(St::Date_ExamDate, St::Default_Date).toDate());
+    textLineEdit->setText(setting->value(St::Date_Text, St::Default_Text).toString());
 
-    opacityDoubleSpinBox->setValue(setting->value(ST::ACTION_OPACITY, ST::DEFAULT_OPACITY).toDouble());
+    opacityDoubleSpinBox->setValue(setting->value(St::Action_Opacity, St::Default_Opacity).toDouble());
 
     // Read startup state
-    if (reg->value(ST::APP_NAME).toString()
-            == QApplication::applicationFilePath().replace("/", "\\")) {
+    if (reg->value(St::AppName).toString() == filePath) {
         autoRunCheckBox->setChecked(true);
     } else {
         autoRunCheckBox->setChecked(false);
@@ -40,15 +40,17 @@ void SettingDialog::readSetting()
 void SettingDialog::on_buttonBox_accepted()
 {
     // Set exam date
-    setting->setValue(ST::DATA_EXAMDATE, calendar->selectedDate());
-    setting->setValue(ST::DATA_TEXT, textLineEdit->text());
-    setting->setValue(ST::ACTION_OPACITY, opacityDoubleSpinBox->value());
+    setting->setValue(St::Date_ExamDate, calendar->selectedDate());
+    setting->setValue(St::Date_Text, textLineEdit->text());
+    setting->setValue(St::Action_Opacity, opacityDoubleSpinBox->value());
 
     // Change startup state
     if (autoRunCheckBox->isChecked()) {
-        reg->setValue(ST::APP_NAME, QApplication::applicationFilePath().replace("/", "\\"));
+        if (reg->value(St::AppName).toString() != filePath) {
+            reg->setValue(St::AppName, filePath);
+        }
     } else {
-        reg->remove(ST::APP_NAME);
+        reg->remove(St::AppName);
     }
 }
 
@@ -56,11 +58,11 @@ void SettingDialog::on_buttonBox_accepted()
 void SettingDialog::on_buttonBox_clicked(QAbstractButton *button)
 {
     if (button == buttonBox->button(QDialogButtonBox::RestoreDefaults)) {
-        bool isFirstRun = setting->value(ST::ACTION_FIRSTRUN, true).toBool();
-        setting->remove(ST::DATA);
-        setting->remove(ST::ACTION);
-        reg->remove(ST::APP_NAME);
-        setting->setValue(ST::ACTION_FIRSTRUN, isFirstRun);
+        bool isFirstRun = setting->value(St::Action_FirstRun, true).toBool();
+        setting->remove(St::Date);
+        setting->remove(St::Action);
+        reg->remove(St::AppName);
+        setting->setValue(St::Action_FirstRun, isFirstRun);
         readSetting(); // Read Default Settings
     }
 }

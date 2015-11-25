@@ -6,23 +6,23 @@
 #include <QObject>
 
 
-namespace ST {
-static const char *ORG_NAME = "LingDong";
-static const char *APP_NAME = "CountDown";
+namespace St {
+const char * const OrgName = "LingDong";
+const char * const AppName = "CountDown";
 
-static const char *DATA = "data";
-static const char *DATA_EXAMDATE = "data/examDate";
-static const char *DATA_TEXT = "data/text";
+const char * const Date = "data";
+const char * const Date_ExamDate = "data/examDate";
+const char * const Date_Text = "data/text";
 
-static const char *ACTION = "action";
-static const char *ACTION_FIRSTRUN = "action/firstRun";
-static const char *ACTION_POS = "action/pos";
-static const char *ACTION_OPACITY = "action/opacity";
+const char * const Action = "action";
+const char * const Action_FirstRun = "action/firstRun";
+const char * const Action_Pos = "action/pos";
+const char * const Action_Opacity = "action/opacity";
 
-static const char DEFAULT_SYMBOL = '%';
-static const QString DEFAULT_TEXT = QObject::tr("%0 Days Before Entrance Exam").arg(DEFAULT_SYMBOL);
-static const QDate DEFAULT_DATE(QDate::currentDate().year(), 6, 7);
-static const double DEFAULT_OPACITY = 0.75;
+const char Default_Symbol = '%';
+const QString Default_Text = QObject::tr("%0 Days Before Entrance Exam").arg(Default_Symbol);
+const QDate Default_Date(QDate::currentDate().year(), 6, 7);
+const double Default_Opacity = 0.75;
 }
 
 #endif // SETTINGS_H

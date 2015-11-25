@@ -23,8 +23,8 @@ private:
     QString text;
     QTimer *timer;
 
-    void mousePressEvent(QMouseEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
     void setTrayIcon();
     void setText();
     void readSetting();
@@ -33,7 +33,7 @@ private:
     void firstRun();
 
 public:
-    explicit Widget(QWidget *parent = 0);
+    explicit Widget(QWidget *parent = nullptr);
     ~Widget();
 };
 
