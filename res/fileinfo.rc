@@ -26,7 +26,7 @@ VS_VERSION_INFO VERSIONINFO
                 VALUE "CompanyName", "灵动计算机社\0"
                 VALUE "FileDescription", "高考倒计时\0"
                 VALUE "FileVersion", "0.0.3.0\0"
-                VALUE "LegalCopyright", "Copyright (C) 2015 灵动计算机社 The MIT License\0"
+                VALUE "LegalCopyright", "灵动计算机社 The MIT License\0"
                 VALUE "OriginalFilename", "CountDown.exe\0"
                 VALUE "ProductName", "高考倒计时\0"
                 VALUE "ProductVersion", "0.0.3.0\0"

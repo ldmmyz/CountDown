@@ -3,8 +3,6 @@
 
 #include <QDate>
 #include <QString>
-#include <QObject>
-
 
 namespace St {
 const char * const OrgName = "LingDong";
@@ -20,7 +18,6 @@ const char * const Action_Pos = "action/pos";
 const char * const Action_Opacity = "action/opacity";
 
 const char Default_Symbol = '%';
-const QString Default_Text = QObject::tr("%0 Days Before Entrance Exam").arg(Default_Symbol);
 const QDate Default_Date(QDate::currentDate().year(), 6, 7);
 const double Default_Opacity = 0.75;
 }

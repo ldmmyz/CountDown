@@ -1,4 +1,5 @@
 #include "settingdialog.h"
+#include "widget.h"
 #include "settings.h"
 #include <QSettings>
 #include <QPushButton>
@@ -10,7 +11,7 @@ SettingDialog::SettingDialog(QWidget *parent) :
     setupUi(this);
 
     setting = new QSettings(St::OrgName, St::AppName, this);
-    reg = new QSettings("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",
+    reg = new QSettings(R"(HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run)",
                         QSettings::NativeFormat, this);
     readSetting();
 
@@ -24,8 +25,11 @@ SettingDialog::SettingDialog(QWidget *parent) :
 void SettingDialog::readSetting()
 {
     calendar->setSelectedDate(setting->value(St::Date_ExamDate, St::Default_Date).toDate());
-    textLineEdit->setText(setting->value(St::Date_Text, St::Default_Text).toString());
-
+    textLineEdit->setText(
+                setting->value(
+                    St::Date_Text,
+                    tr("%0 Days Before Entrance Exam").arg(St::Default_Symbol)
+                ).toString());
     opacityDoubleSpinBox->setValue(setting->value(St::Action_Opacity, St::Default_Opacity).toDouble());
 
     // Read startup state
@@ -64,6 +68,9 @@ void SettingDialog::on_buttonBox_clicked(QAbstractButton *button)
         reg->remove(St::AppName);
         setting->setValue(St::Action_FirstRun, isFirstRun);
         readSetting(); // Read Default Settings
+        Widget *p = dynamic_cast<Widget*>(parentWidget());
+        if (p)
+            p->readSetting();
     }
 }
 

@@ -71,7 +71,10 @@ void Widget::setText()
 void Widget::readSetting()
 {
     examDate = setting->value(St::Date_ExamDate, St::Default_Date).toDate();
-    text = setting->value(St::Date_Text, St::Default_Text).toString();
+    text = setting->value(
+                St::Date_Text,
+                tr("%0 Days Before Entrance Exam").arg(St::Default_Symbol)
+           ).toString();
     setWindowOpacity(setting->value(St::Action_Opacity, St::Default_Opacity).toDouble());
     setText();
     adjustSize();
@@ -84,7 +87,7 @@ void Widget::readSetting()
 void Widget::showAbout()
 {
     QMessageBox::about(this, tr("About"),
-                       tr("<h1>Count Down</h1><p><strong>Copyright 2015 <a href='http://ld.mmyz.net/'>LingDong Computer Society</a></strong><br/>This is an opensource software under The MIT License.</p><p>Home Page: <a href='http://github.com/ziqin/CountDown'>http://github.com/ziqin/CountDown</a></p>"));
+                       tr("<h1>Count Down</h1><p><strong>Copyright 2015 <a href='http://ld.mmyz.net/'>LingDong Computer Society</a></strong><br>This is an opensource software under The MIT License.</p><p>Home Page: <a href='https://github.com/ziqin/CountDown'>https://github.com/ziqin/CountDown</a></p>"));
 }
 
 void Widget::showSetting()

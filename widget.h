@@ -27,7 +27,6 @@ private:
     void mouseMoveEvent(QMouseEvent *event) override;
     void setTrayIcon();
     void setText();
-    void readSetting();
     void showAbout();
     void showSetting();
     void firstRun();
@@ -35,6 +34,7 @@ private:
 public:
     explicit Widget(QWidget *parent = nullptr);
     ~Widget();
+    void readSetting();
 };
 
 #endif // WIDGET_H
