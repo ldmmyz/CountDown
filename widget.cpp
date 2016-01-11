@@ -9,6 +9,7 @@
 #include <QSettings>
 #include <QTimer>
 #include <QDesktopWidget>
+#include <QDebug>
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent)
@@ -42,10 +43,10 @@ Widget::Widget(QWidget *parent) :
 
     setWindowFlags(Qt::FramelessWindowHint | Qt::Tool); // no window border, no taskbar icon
 
-    // Update every minute
+    // Update once every 10 seconds
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &Widget::setText);
-    timer->start(5000);
+    timer->start(10000);
 }
 
 Widget::~Widget()
@@ -65,7 +66,7 @@ void Widget::mouseMoveEvent(QMouseEvent *event)
 
 void Widget::setText()
 {
-    label->setText(text.replace(St::Default_Symbol, QString::number(QDate::currentDate().daysTo(examDate))));
+    label->setText(QString(text).replace(St::Default_Symbol, QString::number(QDate::currentDate().daysTo(examDate))));
 }
 
 void Widget::readSetting()
