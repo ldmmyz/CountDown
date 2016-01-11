@@ -9,7 +9,6 @@
 #include <QSettings>
 #include <QTimer>
 #include <QDesktopWidget>
-#include <QDebug>
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent)
