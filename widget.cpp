@@ -21,9 +21,9 @@ Widget::Widget(QWidget *parent) :
     settingAction = new QAction(tr("Preference (&S)"), this);
     aboutAction = new QAction(tr("About (&A)"), this);
     quitAction = new QAction(tr("Quit (&Q)"), this);
-    connect(settingAction, &QAction::triggered, this, &Widget::showSetting);
-    connect(aboutAction, &QAction::triggered, this, &Widget::showAbout);
-    connect(quitAction, &QAction::triggered, qApp, &QApplication::quit);
+    connect(settingAction, SIGNAL(triggered()), this, SLOT(showSetting()));
+    connect(aboutAction, SIGNAL(triggered()), this, SLOT(showAbout()));
+    connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
 
     // Set system tray icon
     trayIcon = new QSystemTrayIcon(icon, this);
@@ -44,7 +44,7 @@ Widget::Widget(QWidget *parent) :
 
     // Update once every 10 seconds
     timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, &Widget::setText);
+    connect(timer, SIGNAL(timeout()), this, SLOT(setText()));
     timer->start(10000);
 }
 

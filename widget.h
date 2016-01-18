@@ -26,10 +26,12 @@ private:
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
     void setTrayIcon();
+    void firstRun();
+
+private slots:
     void setText();
     void showAbout();
     void showSetting();
-    void firstRun();
 
 public:
     explicit Widget(QWidget *parent = nullptr);
