@@ -1,7 +1,6 @@
 #include "widget.h"
 #include "settings.h"
 #include "settingdialog.h"
-#include <QScopedPointer>
 #include <QMouseEvent>
 #include <QSystemTrayIcon>
 #include <QMenu>
@@ -11,7 +10,8 @@
 #include <QDesktopWidget>
 
 Widget::Widget(QWidget *parent) :
-    QWidget(parent)
+    QWidget(parent),
+    settingDialog(nullptr)
 {
     setupUi(this);
 
@@ -22,7 +22,14 @@ Widget::Widget(QWidget *parent) :
     aboutAction = new QAction(tr("About (&A)"), this);
     quitAction = new QAction(tr("Quit (&Q)"), this);
     connect(settingAction, &QAction::triggered, this, &Widget::showSetting);
-    connect(aboutAction, &QAction::triggered, this, &Widget::showAbout);
+    connect(aboutAction, &QAction::triggered, [this]{
+        QMessageBox::about(this, tr("About"),
+            tr("<h1>Count Down</h1><p><strong>Copyright 2015 "
+            "<a href='http://ld.mmyz.net/'>LingDong Computer Society</a></strong>"
+            "<br>This is an opensource software under The MIT License.</p>"
+            "<p>Home Page: <a href='https://github.com/ziqin/CountDown'>"
+            "https://github.com/ziqin/CountDown</a></p>"));
+    });
     connect(quitAction, &QAction::triggered, qApp, &QApplication::quit);
 
     // Set system tray icon
@@ -84,17 +91,17 @@ void Widget::readSetting()
                         QPoint(QApplication::desktop()->width() - width() - 35, 35)).toPoint());
 }
 
-void Widget::showAbout()
-{
-    QMessageBox::about(this, tr("About"),
-                       tr("<h1>Count Down</h1><p><strong>Copyright 2015 <a href='http://ld.mmyz.net/'>LingDong Computer Society</a></strong><br>This is an opensource software under The MIT License.</p><p>Home Page: <a href='https://github.com/ziqin/CountDown'>https://github.com/ziqin/CountDown</a></p>"));
-}
-
 void Widget::showSetting()
 {
-    QScopedPointer<SettingDialog> settingDialog(new SettingDialog(this));
-    if (settingDialog->exec() == QDialog::Accepted)
-        readSetting();
+    if (!settingDialog) {
+        settingDialog = new SettingDialog(this);
+        if (settingDialog->exec() == QDialog::Accepted)
+            readSetting();
+        delete settingDialog;
+        settingDialog = nullptr;
+    } else {
+        settingDialog->raise();
+    }
 }
 
 /// Show Setting Dialog & Tip Message if it's the first execution

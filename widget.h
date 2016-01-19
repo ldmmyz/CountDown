@@ -6,6 +6,7 @@
 
 class QSystemTrayIcon;
 class QSettings;
+class SettingDialog;
 
 class Widget : public QWidget, private Ui::Widget
 {
@@ -22,12 +23,12 @@ private:
     QDate examDate;
     QString text;
     QTimer *timer;
+    SettingDialog *settingDialog;
 
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
     void setTrayIcon();
     void setText();
-    void showAbout();
     void showSetting();
     void firstRun();
 
