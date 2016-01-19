@@ -83,5 +83,5 @@ void SettingDialog::on_opacitySlider_valueChanged(int value)
 /// Sync opacityDoubleSpinBox to opacitySlider
 void SettingDialog::on_opacityDoubleSpinBox_valueChanged(double value)
 {
-    opacitySlider->setValue(int(value * 100));
+    opacitySlider->setValue(int(value * 100 + 0.5));    // int(n+0.5), get a round number
 }
