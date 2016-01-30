@@ -18,7 +18,11 @@ const char * const Action_Pos = "action/pos";
 const char * const Action_Opacity = "action/opacity";
 
 const char Default_Symbol = '%';
-const QDate Default_Date(QDate::currentDate().year(), 6, 7);
+const QDate Default_Date = []{
+    QDate today = QDate::currentDate();
+    QDate examDate = QDate(today.year(), 6, 7);
+    return today.daysTo(examDate) < 0 ? examDate.addYears(1) : examDate;
+}();
 const double Default_Opacity = 0.75;
 }
 
